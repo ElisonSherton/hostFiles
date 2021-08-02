@@ -3,7 +3,7 @@ import streamlit as st
 
 st.markdown("# Welcome to templates cleanup app")
 
-name = st.text_input("Enter annotator's name")
+name = st.text_input("Enter annotator's name", "vinayak")
 
 data = json.load(open(f"{name.lower()}_annots.json", "r"))
 
