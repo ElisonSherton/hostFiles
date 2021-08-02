@@ -1,7 +1,11 @@
 import json
 import streamlit as st
 
-data = json.load(open("templates.json", "r"))
+st.markdown("# Welcome to templates cleanup app")
+
+name = st.text_input("Enter annotator's name")
+
+data = json.load(open(f"{name.lower()}_annots.json", "r"))
 
 if 'product_number' not in st.session_state:
     st.session_state.product_number = 0
@@ -36,7 +40,8 @@ ta = template_area.text_area("Template", value = template)
 if submit.button("Submit"):
     st.session_state.annotations[st.session_state.product_number] = ta
 
-st.write(st.session_state.annotations)
+st.write(f"Annotations saved so far: {len(st.session_state.annotations)}")
+st.write(f"Annotations visited so far: {st.session_state.product_number + 1}")
 
 if st.button("Dump"):
     json.dump(st.session_state.annotations, open("modified_templates.json", "w"))
